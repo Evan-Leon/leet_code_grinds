@@ -12,8 +12,17 @@
  */
 var inorderTraversal = function(root) {
     if (root === null) return [];
-    
-    return [...inorderTraversal(root.left), root.val, ...inorderTraversal(root.right)]
+    const retArr = [];
+    const leftArr = inorderTraversal(root.left);
+    for (let ele of leftArr){
+        retArr.push(ele)
+    }
+    retArr.push(root.val);
+    const rightArr = inorderTraversal(root.right);
+    for (let ele of rightArr){
+        retArr.push(ele)
+    }
+    return retArr;
     
   
     
