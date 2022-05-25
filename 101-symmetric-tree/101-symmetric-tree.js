@@ -13,13 +13,24 @@
 var isSymmetric = function(root) {
   if (root === null) return true;
     
-  return dfs(root.left, root.right);
+  const qu1 = [root.left];
+  const qu2 = [root.right];
+    
+  while (qu1.length > 0 && qu2.length >0 ){
+      const left = qu1.shift();
+      const right = qu2.shift();
+      
+      if (left === null && right === null) continue;
+      
+      if (left === null || right === null) return false;
+      if (left.val !== right.val) return false;
+      
+      qu1.push(left.left)
+      qu2.push(right.right)
+      qu1.push(left.right)
+      qu2.push(right.left)
+  }
+    
+  return true;
 };
 
-const dfs = (left, right) => {
-    if (left === null && right === null) return true;
-    if (left === null || right === null) return false;
-    if (left.val !== right.val) return false;
-    
-    return dfs(left.left, right.right) && dfs(left.right, right.left)
-}
